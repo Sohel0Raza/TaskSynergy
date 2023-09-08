@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input-field{
+  @apply p-3 shadow-xl outline-none border-l-4 my-2 rounded-l-md border-secondary focus:border-secondary focus:rounded-none focus:outline-none focus:border-b-2 focus:border-l-0
+}
+.active{
+  @apply text-primary md:text-white md:text-base tracking-wide  md:border-b-2 md:border-warning transition-colors duration-200
+}
+
+.default{
+  @apply text-base text-white transition-colors duration-200 hover:text-warning
+}
