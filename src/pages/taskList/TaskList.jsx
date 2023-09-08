@@ -1,20 +1,11 @@
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useTask from "../../hooks/useTask";
+import useLocalStorage from "use-local-storage";
 
 const TaskList = () => {
-  const [tasks, , loading] = useTask()
-  const [allTasks, setAllTasks] = useState([]);
-
-  useEffect(() => {
-    if (!loading) {
-      setAllTasks(tasks);
-    }
-  }, [tasks, loading]);
+  const [tasks, setTasks] = useLocalStorage("allTasks", []);
 
   const [selectedPriority, setSelectedPriority] = useState('all');
-
-
   const handleMarkToCompleted = (taskId) => {
     const updatedTasks = tasks.map((task) => {
       if (task.id === taskId) {
@@ -22,7 +13,7 @@ const TaskList = () => {
       }
       return task;
     });
-    setAllTasks(updatedTasks);
+    setTasks(updatedTasks);
     localStorage.setItem('allTasks', JSON.stringify(updatedTasks));
   }
 
@@ -31,16 +22,8 @@ const TaskList = () => {
 
     setSelectedPriority(priority);
     const filteredTasks = priority === 'all' ? tasks : tasks.filter(task => task.priority === priority);
-    setAllTasks(filteredTasks);
+    setTasks(filteredTasks);
   };
-
-  if (loading) {
-    return <div className="flex justify-center md:mt-52"><span className="loading loading-bars loading-xs"></span>
-      <span className="loading loading-bars loading-sm"></span>
-      <span className="loading loading-bars loading-md"></span>
-      <span className="loading loading-bars loading-lg"></span></div>
-  }
-
   return (
     <div className="space-y-4 my-10">
       <div className="flex justify-end mr-16">
@@ -53,7 +36,7 @@ const TaskList = () => {
         </select>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mx-5 md:mx-16">
-        {allTasks?.map((task, index) => (
+        {tasks?.map((task, index) => (
           <div key={index} className="card bg-base-100 shadow-xl transition-transform transform hover:scale-110">
             <div className="card-body ">
               <h3 className="text-xl text-secondary font-bold mb-2">{task.title}</h3>

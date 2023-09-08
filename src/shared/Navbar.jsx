@@ -2,12 +2,14 @@ import { Link, NavLink } from 'react-router-dom';
 import { deleteUser } from '../hooks/userdb';
 import useUser from '../hooks/useUser';
 import userPhoto from '../assets/download13.png'
+import useLocalStorage from 'use-local-storage';
 
 const Navbar = () => {
-  const [user, setUser] = useUser()
+  const [loginUser, setLoginUser] = useLocalStorage("loginUser");
+
   const handleLogOut = () => {
     deleteUser();
-    setUser(null);
+    setLoginUser(null);
   };
   const navItem = (
     <>
@@ -40,7 +42,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 font-semibold space-x-7">{navItem}</ul>
       </div>
       <div className="navbar-end md:mr-10">
-        {user ? (
+        {loginUser ? (
           <>
             <div className="flex justify-between items-center">
               <Link to="/login"><button className='hover:border-[1px] hover:border-warning p-2 rounded-md' onClick={handleLogOut}>SIGN OUT</button>

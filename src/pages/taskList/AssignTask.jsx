@@ -1,32 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom";
-import useAllGroup from "../../hooks/useAllGroup";
-import useAllUser from "../../hooks/useAllUser";
-import { useEffect, useState } from "react";
-import useTask from "../../hooks/useTask";
+import useLocalStorage from "use-local-storage";
 
 const AssignTask = () => {
-    const [tasks] = useTask()
-    const [users, loading] = useAllUser()
-    const [groups, isLoading] = useAllGroup()
-    const [userList, setUserList] = useState([]);
+    const [tasks, setTasks] = useLocalStorage("allTasks", []);
+    const [users, setUsers] = useLocalStorage("allUser", []);
+    const [groups, setGroups] = useLocalStorage("allGroup", []);
     const navigate = useNavigate()
-  
 
-    useEffect(() => {
-        if (!loading) {
-            setUserList(users);
-        }
-    }, [users, loading]);
     const { id } = useParams()
     const handleGroupChange = (event) => {
         const groupId = event.target.value;
         const newUsers = users.filter(user =>
-        user.groupId === groupId
+            user.groupId === groupId
         )
-        setUserList(newUsers)
+        setUsers(newUsers)
     }
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const from = e.target
@@ -41,7 +29,7 @@ const AssignTask = () => {
         const assignTasks = users[indexUser]?.tasks?.push(task);
         users[indexUser] = { ...users[indexUser], task: assignTasks }
         localStorage.setItem('allUser', JSON.stringify(users));
-        navigate('/', {replace: true})
+        navigate('/', { replace: true })
 
     }
     return (
@@ -79,7 +67,7 @@ const AssignTask = () => {
                             >
                                 <option value="">Select User</option>
                                 {
-                                    userList?.map(user => <option key={user.id} value={user.id}>{user.fullName}</option>)
+                                    users?.map(user => <option key={user.id} value={user.id}>{user.fullName}</option>)
                                 }
 
                             </select>

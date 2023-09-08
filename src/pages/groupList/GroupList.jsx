@@ -4,9 +4,11 @@ import { groupAddTodb } from "../../hooks/userdb";
 import { useState } from "react";
 import useAllUser from "../../hooks/useAllUser";
 import { BsFillSendFill } from "react-icons/bs";
+import useLocalStorage from "use-local-storage";
 
 const GroupList = () => {
-    const [users, loading] = useAllUser()
+    const [users, setUsers] = useLocalStorage("allUser");
+
     const allGroup = localStorage.getItem('allGroup') ? JSON.parse(localStorage.getItem('allGroup')) : []
     const [groups, setGroups] = useState(allGroup);
     const [newGroup, setNewGroup] = useState({

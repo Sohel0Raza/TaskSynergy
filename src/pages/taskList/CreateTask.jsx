@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const CreateTask = () => {
     const navigate = useNavigate()
-  
+
     const from = "/"
     const PriorityEnum = {
         LOW: 'Low',
@@ -31,7 +31,7 @@ const CreateTask = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setNewTask({ ...newTask, id: new Date().getTime().toString(), [name]: value , status: TaskStatusEnum.PENDING} );
+        setNewTask({ ...newTask, id: new Date().getTime().toString(), [name]: value, status: TaskStatusEnum.PENDING });
     };
 
     const handleSubmit = (e) => {
@@ -41,7 +41,7 @@ const CreateTask = () => {
             TaskAddTodb(newTask)
             toast('Task Create Successful!');
         }
-        navigate(from, {replace: true})
+        navigate(from, { replace: true })
     };
     return (
         <div className="py-10">
@@ -110,7 +110,7 @@ const CreateTask = () => {
                             >
                                 Create Task
                             </button>
-                            <ToastContainer/>
+                            <ToastContainer />
                         </div>
                     </div>
                 </form>

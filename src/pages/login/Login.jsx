@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,9 +10,8 @@ const Login = () => {
     const [passwordInput, setPasswordInput] = useState("");
     const [UnameOrEmail, setUnameOrEmail] = useState("");
     const navigate = useNavigate()
-    const location = useLocation()
   
-    const from = location.state?.from?.pathname || "/"
+    const from ="/"
     
     const togglePassword = () => {
         if (passwordType === "password") {
@@ -40,13 +39,13 @@ const Login = () => {
                 setUnameOrEmail()
                 addLoginUser(user)
                 toast('Login Successful');
+                navigate(from, {replace: true})
             } else {
                 toast('Wrong password');
             }
         } else {
             toast('Username or Email not found');
         }
-        navigate(from, {replace: true})
     };
     
 
