@@ -16,9 +16,6 @@ const Navbar = () => {
       <NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to="/groupList">
         All Group
       </NavLink>
-      <NavLink className={({ isActive }) => (isActive ? 'active' : 'default')} to="/dashboard/selectClass">
-        Dashboard
-      </NavLink>
     </>
   );
 
@@ -34,8 +31,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex justify-center items-center">
-
-          <h2 className="text-xl md:text-2xl font-semibold uppercase">TaskSynergy</h2>
+          <h2 className="text-xl md:text-2xl font-semibold md:ml-16">TASK <span className='text-primary hover:text-warning duration-1000'>Synergy</span></h2>
         </div>
       </div>
 

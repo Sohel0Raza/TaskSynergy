@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const useUser = () => {
     const [user, setUser] = useState(null);
-    const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -13,16 +12,7 @@ const useUser = () => {
         }
 
     }, []);
-
-    useEffect(() => {
-        return async () => {
-            const allUser = await JSON.parse(localStorage.getItem('allUser'));
-            setUsers(allUser);
-            setLoading(false)
-        }
-
-    }, []);
-    return [user, loading, users]
+    return [user, loading]
 
 };
 

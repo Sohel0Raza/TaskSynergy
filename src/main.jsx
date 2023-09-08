@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/groupList',
-        element:<GroupList/>
+        element:<PrivateRoute><GroupList/></PrivateRoute>
       },
       {
         path:'/login',

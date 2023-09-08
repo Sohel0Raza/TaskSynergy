@@ -12,3 +12,9 @@
 .default{
   @apply text-base text-white transition-colors duration-200 hover:text-warning
 }
+.btn-secondary {
+  @apply text-white hover:text-sky-100 transition duration-200 shadow-2xl md:mb-0 px-2 md:px-4 py-1 rounded-full bg-blue-500 hover:bg-blue-600
+} 
+.btn-info {
+  @apply text-white hover:text-sky-100 transition duration-200 shadow-2xl md:mb-0 px-2 md:px-4 py-1 rounded-full bg-warning hover:bg-yellow-600
+} 
