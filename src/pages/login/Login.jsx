@@ -38,15 +38,15 @@ const Login = () => {
             if (password === user.password) {
                 form.reset();
                 setUnameOrEmail()
-                toast('Login Successful');
                 addLoginUser(user)
-                navigate(from, {replace: true})
+                toast('Login Successful');
             } else {
                 toast('Wrong password');
             }
         } else {
             toast('Username or Email not found');
         }
+        navigate(from, {replace: true})
     };
     
 

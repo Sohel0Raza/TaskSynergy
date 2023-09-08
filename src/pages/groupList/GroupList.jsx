@@ -3,11 +3,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { groupAddTodb } from "../../components/userdb";
 import { useState } from "react";
 import useAllUser from "../../components/useAllUser";
+import { BsFillSendFill } from "react-icons/bs";
 
 const GroupList = () => {
     const [users, loading] = useAllUser()
     const allGroup = localStorage.getItem('allGroup') ? JSON.parse(localStorage.getItem('allGroup')) : []
-    console.log('allGroup :', allGroup);
     const [groups, setGroups] = useState(allGroup);
     const [newGroup, setNewGroup] = useState({
         groupName: '',
@@ -24,7 +24,7 @@ const GroupList = () => {
             form.reset()
             groupAddTodb(newGroup)
             toast('Group Create Successful!');
-            closeCreteGroupModal()
+            closeModal('createGroupModal')
         }
     };
 
@@ -32,8 +32,8 @@ const GroupList = () => {
     const openCreteGroupModal = () => {
         document.getElementById('createGroupModal').showModal()
     }
-    const closeCreteGroupModal = () => {
-        document.getElementById('createGroupModal').close()
+    const closeModal = (id) => {
+        document.getElementById(id).close()
     }
 
     const openUserInviteModal = (groupId) => {
@@ -55,31 +55,57 @@ const GroupList = () => {
         const invitedUsers = groups[groupIndex]?.users?.push(user);
         groups[groupIndex] = { ...groups[groupIndex], user: invitedUsers }
         localStorage.setItem('allGroup', JSON.stringify(groups));
-
+        closeModal("inviteUserModal")
     }
-
     return (
         <div>
             <div className="my-10">
+                <div className="text-center">
+                    <button className="btn btn-primary" onClick={openCreteGroupModal}>Create Group</button>
+                </div>
                 <div className="space-y-4 my-10">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-5 md:mx-10 ">
                         {groups?.map((group, index) => (
                             <div
                                 key={index}
-                                className="bg-white shadow-md p-4 rounded-lg transition-transform transform hover:scale-105"
+                                className="bg-white shadow-md py-5 px-8 rounded-lg transition-transform transform hover:scale-105"
                             >
-                                <h3 className="text-xl font-semibold mb-2">{group.groupName}</h3>
-                                <button onClick={() => openUserInviteModal(group.id)}>Send Invite</button>
+                                <h3 className="font-semibold text-center text-2xl mb-4 text-warning hover:text-black hover:duration-1000">{group.groupName}</h3>
+                                <span className="font-semibold rounded-md">Group Members : </span>
+                                 <span> {group.users?.length} </span>
+                                  <br />
+                                <div className="py-1">
+                                    {
+                                        group.users?.map(user => <div key={user.id}>
+                                            <ul>
+                                                <li>
+                                                    {user.fullName}
+                                                </li>
+                                            </ul>
+                                        </div>)
+                                    }
+                                </div>
+                                <div className="flex justify-end">
+                                    <button className="btn btn-xs bg-blue-500 hover:bg-blue-600 text-white" onClick={() => openUserInviteModal(group.id)}>Add Member <BsFillSendFill /></button>
+                                </div>
                                 <dialog id="inviteUserModal" className="modal modal-bottom sm:modal-middle">
                                     <div className="modal-box">
                                         <input id="groupId" type="hidden" />
                                         <h2 className="font-bold text-2xl mb-2">User List</h2>
                                         <div>
                                             {users?.map((user) => <ul key={user.id}>
-                                                <li className="flex justify-between">{user.fullName} <button onClick={() => handleUserInvite(user.id)} className="btn btn-xs">Invite</button></li>
+                                                <li className="flex justify-between">{user.fullName}
+                                                    <div>
+                                                        {!user.groupId && (
+                                                            <button onClick={() => handleUserInvite(user.id)} className="btn btn-xs bg-blue-500 hover:bg-blue-600 text-white">Invite</button>
+                                                        )}
+                                                    </div>
+                                                </li>
                                             </ul>)}
                                         </div>
-
+                                        <div className="flex justify-end mt-3">
+                                            <button type="button" onClick={() => closeModal('inviteUserModal')} className="btn btn-xs ml-3">Close</button>
+                                        </div>
                                     </div>
                                 </dialog>
                             </div>
@@ -88,7 +114,7 @@ const GroupList = () => {
                 </div>
             </div>
             <div>
-                <button className="btn" onClick={openCreteGroupModal}>open modal</button>
+
                 <dialog id="createGroupModal" className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box">
                         <form onSubmit={handleSubmit}>
@@ -101,6 +127,7 @@ const GroupList = () => {
                                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         type="text"
                                         name="groupName"
+                                        required="required"
                                         value={newGroup.groupName}
                                         onChange={handleChange}
                                     />
@@ -112,9 +139,9 @@ const GroupList = () => {
                                     type="submit"
                                     className="btn btn-primary btn-sm"
                                 >
-                                    Create Group
+                                    Create New Group
                                 </button>
-                                <button type="button" onClick={closeCreteGroupModal} className="btn btn-warning btn-sm">Close</button>
+                                <button type="button" onClick={() => closeModal('createGroupModal')} className="btn btn-warning btn-sm">Close</button>
                             </div>
                         </form>
 

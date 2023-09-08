@@ -2,9 +2,12 @@ import { useState } from "react";
 import { TaskAddTodb } from "../../components/userdb";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CreateTask = () => {
-
+    const navigate = useNavigate()
+  
+    const from = "/"
     const PriorityEnum = {
         LOW: 'Low',
         MEDIUM: 'Medium',
@@ -37,8 +40,8 @@ const CreateTask = () => {
             setTasks([...tasks, newTask]);
             TaskAddTodb(newTask)
             toast('Task Create Successful!');
-
         }
+        navigate(from, {replace: true})
     };
     return (
         <div className="py-10">
@@ -54,6 +57,7 @@ const CreateTask = () => {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 type="text"
                                 name="title"
+                                required="required"
                                 value={newTask.title}
                                 onChange={handleChange}
                             />
@@ -65,6 +69,7 @@ const CreateTask = () => {
                             <textarea
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 name="description"
+                                required="required"
                                 value={newTask.description}
                                 onChange={handleChange}
                             />
@@ -77,6 +82,7 @@ const CreateTask = () => {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 type="date"
                                 name="dueDate"
+                                required="required"
                                 value={newTask.dueDate}
                                 onChange={handleChange}
                             />
@@ -88,6 +94,7 @@ const CreateTask = () => {
                             <select
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 name="priority"
+                                required="required"
                                 value={newTask.priority}
                                 onChange={handleChange}
                             >

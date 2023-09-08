@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { deleteUser } from '../components/userdb';
 import useUser from '../components/useUser';
+import userPhoto from '../assets/download13.png'
 
 const Navbar = () => {
   const [user, setUser] = useUser()
@@ -38,13 +39,13 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 font-semibold space-x-7">{navItem}</ul>
       </div>
-
       <div className="navbar-end md:mr-10">
         {user ? (
           <>
             <div className="flex justify-between items-center">
               <Link to="/login"><button className='hover:border-[1px] hover:border-warning p-2 rounded-md' onClick={handleLogOut}>SIGN OUT</button>
               </Link>
+              <img className='h-10 w-10 rounded-full ml-2' src={userPhoto} alt="" />
             </div>
           </>
         ) : (

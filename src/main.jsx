@@ -12,10 +12,13 @@ import TaskList from './pages/taskList/TaskList';
 import CreateTask from './pages/taskList/CreateTask';
 import PrivateRoute from './route/PrivateRoute';
 import GroupList from './pages/groupList/GroupList';
+import ErrorPage from './pages/errorPage/ErrorPage';
+import AssignTask from './pages/taskList/AssignTask';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main/>,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
       {
         path:'/',
@@ -28,6 +31,10 @@ const router = createBrowserRouter([
       {
         path:'/groupList',
         element:<PrivateRoute><GroupList/></PrivateRoute>
+      },
+      {
+        path:"assign/:id",
+        element:<AssignTask></AssignTask>
       },
       {
         path:'/login',

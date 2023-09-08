@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useTask = () => {
-    const [task, setTask] = useState(null);
+    const [tasks, setTask] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -12,7 +12,7 @@ const useTask = () => {
         }
 
     }, []);
-    return [task, loading]
+    return [tasks, setTask, loading]
 };
 
 export default useTask;

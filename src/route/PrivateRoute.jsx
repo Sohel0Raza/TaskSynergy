@@ -4,8 +4,6 @@ import useUser from "../components/useUser";
 
 const PrivateRoute = ({ children }) => {
     const [user, loading] = useUser()
-    console.log('useUser() :', useUser());
-    console.log('loading :', loading);
     const location = useLocation()
     if (loading) {
       return  <div className="flex justify-center md:mt-52"><span className="loading loading-bars loading-xs"></span>

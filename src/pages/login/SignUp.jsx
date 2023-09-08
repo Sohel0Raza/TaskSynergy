@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { userAddTodb } from "../../components/userdb";
@@ -8,7 +8,8 @@ import { userAddTodb } from "../../components/userdb";
 const SignUp = () => {
     const [passwordType, setPasswordType] = useState("password");
     const [passwordInput, setPasswordInput] = useState("");
-    
+    const navigate = useNavigate()
+    const from = "/login"
 
     const togglePassword = () => {
         if (passwordType === "password") {
@@ -23,17 +24,18 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const  id = new Date().getTime().toString();
+        const id = new Date().getTime().toString();
         const form = e.target;
         const fullName = form.full_name.value;
         const userName = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        const user = {id, fullName, userName, email, password };
-        console.log(user)
+        const tasks = [];
+        const user = { id, fullName, userName, email, password, tasks };
         userAddTodb(user)
         form.reset()
         toast('Sign Up Successful');
+        navigate(from, { replace: true })
     };
 
     return (
@@ -67,7 +69,7 @@ const SignUp = () => {
                                 </div>
                                 <div className="form-control mt-6">
                                     <input className="btn btn-primary" type="submit" value="Sign Up" />
-                                    <ToastContainer/>
+                                    <ToastContainer />
                                 </div>
                             </div>
                         </form>
