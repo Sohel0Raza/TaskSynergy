@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path:"assign/:id",
-        element:<AssignTask></AssignTask>
+        element:<PrivateRoute><AssignTask/></PrivateRoute>
       },
       {
         path:'/login',

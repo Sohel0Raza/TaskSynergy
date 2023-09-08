@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
-import { deleteUser } from '../components/userdb';
-import useUser from '../components/useUser';
+import { deleteUser } from '../hooks/userdb';
+import useUser from '../hooks/useUser';
 import userPhoto from '../assets/download13.png'
 
 const Navbar = () => {

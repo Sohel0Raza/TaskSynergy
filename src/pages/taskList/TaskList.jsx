@@ -1,6 +1,6 @@
 import { Link, redirect } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useTask from "../../components/useTask";
+import useTask from "../../hooks/useTask";
 
 const TaskList = () => {
   const [tasks, , loading] = useTask()

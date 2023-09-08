@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addLoginUser } from '../../components/userdb';
+import { addLoginUser } from '../../hooks/userdb';
 
 const Login = () => {
     const [passwordType, setPasswordType] = useState("password");

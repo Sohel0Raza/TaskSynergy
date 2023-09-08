@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
-import useAllGroup from "../../components/useAllGroup";
-import useAllUser from "../../components/useAllUser";
+import useAllGroup from "../../hooks/useAllGroup";
+import useAllUser from "../../hooks/useAllUser";
 import { useEffect, useState } from "react";
-import useTask from "../../components/useTask";
+import useTask from "../../hooks/useTask";
 
 const AssignTask = () => {
     const [tasks] = useTask()

@@ -1,8 +1,8 @@
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { groupAddTodb } from "../../components/userdb";
+import { groupAddTodb } from "../../hooks/userdb";
 import { useState } from "react";
-import useAllUser from "../../components/useAllUser";
+import useAllUser from "../../hooks/useAllUser";
 import { BsFillSendFill } from "react-icons/bs";
 
 const GroupList = () => {
@@ -55,6 +55,7 @@ const GroupList = () => {
         const invitedUsers = groups[groupIndex]?.users?.push(user);
         groups[groupIndex] = { ...groups[groupIndex], user: invitedUsers }
         localStorage.setItem('allGroup', JSON.stringify(groups));
+
         closeModal("inviteUserModal")
     }
     return (

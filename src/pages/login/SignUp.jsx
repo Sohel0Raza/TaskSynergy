@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { userAddTodb } from "../../components/userdb";
+import { userAddTodb } from "../../hooks/userdb";
 
 const SignUp = () => {
     const [passwordType, setPasswordType] = useState("password");
