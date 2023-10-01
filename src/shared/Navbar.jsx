@@ -1,6 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
 import { deleteUser } from '../hooks/userdb';
-import useUser from '../hooks/useUser';
 import userPhoto from '../assets/download13.png'
 import useLocalStorage from 'use-local-storage';
 

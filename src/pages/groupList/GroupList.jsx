@@ -2,7 +2,6 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { groupAddTodb } from "../../hooks/userdb";
 import { useState } from "react";
-import useAllUser from "../../hooks/useAllUser";
 import { BsFillSendFill } from "react-icons/bs";
 import useLocalStorage from "use-local-storage";
 
@@ -59,6 +58,7 @@ const GroupList = () => {
         localStorage.setItem('allGroup', JSON.stringify(groups));
 
         closeModal("inviteUserModal")
+        window.location.reload()
     }
     return (
         <div>
